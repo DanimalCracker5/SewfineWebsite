@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home | SewFine LLC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #f5f0e8;
+    --dark: #0e0e0e;
+    --charcoal: #1a1a1a;
+    --gold: #c9a84c;
+    --gold-light: #e0c278;
+    --muted: #888;
+    --border: rgba(201,168,76,0.25);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dark);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 60px;
+    background: rgba(14,14,14,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--cream);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--gold); }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    transition: opacity 0.2s, color 0.2s;
+  }
+
+  .nav-links a:hover { opacity: 1; color: var(--gold); }
+
+  .nav-cta {
+    background: var(--gold) !important;
+    color: var(--dark) !important;
+    padding: 10px 18px !important;
+    border-radius: 2px;
+    opacity: 1 !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.04em !important;
+    white-space: nowrap !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--gold-light) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 140px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 75% 50%, rgba(201,168,76,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 80% at 10% 80%, rgba(201,168,76,0.04) 0%, transparent 60%);
+  }
+
+  /* subtle thread-line decorative element */
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: 120px;
+    top: 20%;
+    bottom: 20%;
+    width: 1px;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 8px,
+      rgba(201,168,76,0.18) 8px,
+      rgba(201,168,76,0.18) 10px
+    );
+  }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.2rem, 7vw, 6.5rem);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    max-width: 720px;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.35s forwards;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    color: rgba(245,240,232,0.65);
+    max-width: 500px;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.5s forwards;
+    text-align: center;
+  }
+
+  .hero-tagline {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--gold);
+    opacity: 0;
+    animation: fadeUp 0.9s 0.65s forwards;
+    margin-bottom: 48px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.8s forwards;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--dark);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  .btn-secondary {
+    display: inline-block;
+    border: 1px solid var(--border);
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    border-radius: 2px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-meta {
+    position: absolute;
+    bottom: 50px;
+    right: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeUp 0.9s 1s forwards;
+  }
+
+  .hero-meta-item {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+  }
+
+  .hero-meta-item span { color: var(--gold); }
+
+  /* ── REVIEWS STRIP ── */
+  .reviews-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    padding: 28px 60px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: rgba(201,168,76,0.03);
+    opacity: 0;
+    animation: fadeUp 0.9s 1.1s forwards;
+    overflow: hidden;
+  }
+
+  .reviews-rating {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .stars {
+    color: var(--gold);
+    font-size: 1rem;
+    letter-spacing: 2px;
+  }
+
+  .rating-score {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+
+  .rating-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .reviews-divider {
+    width: 1px;
+    height: 40px;
+    background: var(--border);
+    flex-shrink: 0;
+  }
+
+  .reviews-quotes {
+    display: flex;
+    gap: 40px;
+    overflow: hidden;
+  }
+
+  .review-quote {
+    font-size: 0.82rem;
+    color: rgba(245,240,232,0.55);
+    font-style: italic;
+    white-space: nowrap;
+  }
+
+  .review-quote::before { content: '"'; color: var(--gold); margin-right: 4px; }
+  .review-quote::after  { content: '"'; color: var(--gold); margin-left: 4px; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0 60px;
+    margin: 80px 0;
+  }
+
+  .divider-line { flex: 1; height: 1px; background: var(--border); }
+  .divider-text {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* ── SERVICES ── */
+  .services {
+    padding: 0 60px 80px;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+    text-align: center;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    margin-bottom: 70px;
+    max-width: 440px;
+    line-height: 1.15;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .service-card {
+    background: var(--charcoal);
+    padding: 52px 44px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-card:hover { background: #202020; }
+
+  .service-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: rgba(201,168,76,0.12);
+    line-height: 1;
+    margin-bottom: 24px;
+    transition: color 0.3s;
+  }
+
+  .service-card:hover .service-number { color: rgba(201,168,76,0.22); }
+
+  /* sewing icon */
+  .service-icon {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 28px;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+
+  .service-card:hover .service-icon { opacity: 1; }
+
+  .service-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+    letter-spacing: -0.01em;
+  }
+
+  .service-desc {
+    font-size: 0.9rem;
+    color: rgba(245,240,232,0.6);
+    line-height: 1.75;
+    margin-bottom: 32px;
+  }
+
+  .service-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: gap 0.2s;
+  }
+
+  .service-link:hover { gap: 16px; }
+  .service-link::after { content: '→'; }
+
+  /* ── ABOUT STRIP ── */
+  .about-strip {
+    margin: 0 60px 80px;
+    padding: 64px;
+    border: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .about-strip::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 50% 100% at 100% 50%, rgba(201,168,76,0.04) 0%, transparent 60%);
+  }
+
+  .about-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .about-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 24px;
+  }
+
+  .about-title em { font-style: italic; color: var(--gold); }
+
+  .about-body {
+    font-size: 0.92rem;
+    color: rgba(245,240,232,0.65);
+    line-height: 1.8;
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2rem;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.5);
+    line-height: 1.4;
+  }
+
+  /* ── CONTACT ── */
+  .contact {
+    padding: 0 60px 120px;
+  }
+
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .contact-info {
+    background: var(--charcoal);
+    padding: 64px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .contact-map {
+    background: #161616;
+    border-top: 1px solid var(--border);
+    overflow: hidden;
+    min-height: 320px;
+  }
+
+  .contact-map iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+    filter: grayscale(60%) invert(90%) hue-rotate(180deg);
+    opacity: 0.75;
+  }
+
+  .contact-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+
+  .contact-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+    line-height: 1.15;
+  }
+
+  .contact-items {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 44px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .contact-item {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .contact-item-icon {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .contact-item-icon svg { width: 16px; height: 16px; stroke: var(--gold); fill: none; }
+
+  .contact-item-text {
+    font-size: 0.88rem;
+    color: rgba(245,240,232,0.7);
+    line-height: 1.5;
+  }
+
+  .contact-item-text strong {
+    display: block;
+    color: var(--cream);
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .contact-item-text a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .contact-item-text a:hover { color: var(--gold); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 60px 60px 40px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .footer-brand span { color: var(--gold); }
+
+  .footer-copy {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .footer-right {
+    display: flex;
+    gap: 24px;
+    justify-content: flex-end;
+  }
+
+  .footer-right a {
+    color: rgba(245,240,232,0.45);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .footer-right a:hover { color: var(--gold); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 18px 20px; }
+    .nav-links { gap: 16px; }
+    .nav-links a { font-size: 0.75rem; }
+    .nav-home { display: none; }
+    .hero { padding: 120px 28px 80px; }
+    .hero::after { display: none; }
+    .hero-meta { display: none; }
+    .reviews-strip { padding: 20px 28px; gap: 16px; }
+    .reviews-quotes { display: none; }
+    .divider { padding: 0 28px; margin: 50px 0; }
+    .services { padding: 0 28px 60px; }
+    .services-grid { grid-template-columns: 1fr; gap: 2px; }
+    .about-strip { margin: 0 28px 60px; padding: 40px 28px; grid-template-columns: 1fr; gap: 40px; }
+    .contact { padding: 0 28px 80px; }
+    .contact-inner { grid-template-columns: 1fr; }
+    .contact-info { padding: 40px 28px; }
+    .contact-map { min-height: 240px; }
+    footer { grid-template-columns: 1fr; text-align: center; gap: 20px; padding: 40px 28px 28px; }
+    .footer-right { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#"><span>Sew</span>Fine LLC</a>
+  <ul class="nav-links">
+    <li class="nav-home"><a href="#">Home</a></li>
+    <li><a href="tel:8103947806" class="nav-cta">Call Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">SewFine LLC · Brighton, Michigan</p>
+  <h1 class="hero-title">Sewing Machine<br><em>Repair</em> &amp; Service</h1>
+  <p class="hero-sub">Expert sewing machine repair serving the Michigan community for over 40 years. From vintage Singers to modern computerized machines — we keep them running like new.</p>
+  <p class="hero-tagline">"Trusted craftsmanship, stitch after stitch."</p>
+  <div class="hero-actions">
+    <a href="tel:8103947806" class="btn-primary">Call (810) 394-7806</a>
+    <a href="#services" class="btn-secondary">Our Services</a>
+  </div>
+  <div class="hero-meta">
+    <span class="hero-meta-item">⭐ <span>5.0</span> Google Rating</span>
+    <span class="hero-meta-item">Serving Michigan <span>40+ Years</span></span>
+    <span class="hero-meta-item">Brighton, MI <span>48116</span></span>
+  </div>
+</section>
+
+<!-- REVIEWS STRIP -->
+<div class="reviews-strip">
+  <div class="reviews-rating">
+    <div class="stars">★★★★★</div>
+    <div class="rating-score">5.0</div>
+    <div class="rating-label">Google Reviews</div>
+  </div>
+  <div class="reviews-divider"></div>
+  <div class="reviews-quotes">
+    <span class="review-quote">Dan was able to get my good old Singer Golden Touch and Sew to work like new!</span>
+    <span class="review-quote">I'm so grateful for Dan from Sew Fine.</span>
+    <span class="review-quote">Will be bringing my machine back for service soon!</span>
+  </div>
+</div>
+
+<!-- DIVIDER -->
+<div class="divider">
+  <div class="divider-line"></div>
+  <span class="divider-text">Services We Offer</span>
+  <div class="divider-line"></div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <p class="section-label reveal">What We Do</p>
+  <h2 class="section-title reveal">Repair &amp; Service<br><em style="font-style:italic;color:var(--gold);">Done Right</em></h2>
+
+  <div class="services-grid">
+
+    <!-- Repair -->
+    <div class="service-card reveal">
+      <div class="service-number">01</div>
+      <svg class="service-icon" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="28" cy="28" r="20" stroke="#c9a84c" stroke-width="1.5"/>
+        <path d="M28 16 L28 28 L36 34" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="28" cy="28" r="2.5" fill="#c9a84c"/>
+      </svg>
+      <h3 class="service-name">Machine Repair</h3>
+      <p class="service-desc">From jammed mechanisms to broken timing, we diagnose and fix all makes and models — mechanical and computerized. Your machine leaves running smoothly, every time.</p>
+      <a class="service-link" href="tel:8103947806">Book a Repair</a>
+    </div>
+
+    <!-- Tune-Up -->
+    <div class="service-card reveal">
+      <div class="service-number">02</div>
+      <svg class="service-icon" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 36 Q28 18 36 36" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="28" cy="20" r="3" stroke="#c9a84c" stroke-width="1.5"/>
+        <line x1="18" y1="40" x2="38" y2="40" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <h3 class="service-name">Cleaning &amp; Tune-Up</h3>
+      <p class="service-desc">Lint, oil residue, and worn parts build up over time. A full cleaning and tune-up restores tension, timing, and stitch quality — keeping your machine in peak condition.</p>
+      <a class="service-link" href="tel:8103947806">Schedule a Tune-Up</a>
+    </div>
+
+    <!-- Vintage / All Brands -->
+    <div class="service-card reveal">
+      <div class="service-number">03</div>
+      <svg class="service-icon" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="14" y="22" width="28" height="18" rx="2" stroke="#c9a84c" stroke-width="1.5"/>
+        <path d="M20 22 L20 18 Q20 14 28 14 Q36 14 36 18 L36 22" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="28" cy="31" r="3" stroke="#c9a84c" stroke-width="1.5"/>
+      </svg>
+      <h3 class="service-name">All Makes &amp; Models</h3>
+      <p class="service-desc">Singer, Brother, Janome, Bernina, Viking — vintage or modern, we service them all. Over four decades of experience means very little we haven't seen and fixed before.</p>
+      <a class="service-link" href="tel:8103947806">Get in Touch</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT STRIP -->
+<div class="about-strip reveal">
+  <div>
+    <p class="about-eyebrow">About SewFine</p>
+    <h2 class="about-title">Over <em>40 Years</em> of<br>Expert Service</h2>
+    <p class="about-body">SewFine LLC is a home-based sewing machine repair service in Brighton, Michigan, run by Dan. With over four decades of hands-on experience, Dan has built a reputation for honest, skilled work and a genuine love for the craft. From beloved vintage machines to the latest computerized models, every repair gets the same careful attention.</p>
+  </div>
+  <div class="about-stats">
+    <div>
+      <div class="stat-number">40+</div>
+      <div class="stat-label">Years Serving Michigan</div>
+    </div>
+    <div>
+      <div class="stat-number">5.0</div>
+      <div class="stat-label">Google Star Rating</div>
+    </div>
+    <div>
+      <div class="stat-number">All</div>
+      <div class="stat-label">Makes &amp; Models Serviced</div>
+    </div>
+    <div>
+      <div class="stat-number">1</div>
+      <div class="stat-label">Call to Get Started</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner reveal">
+    <div class="contact-info">
+      <p class="contact-label">Find Us</p>
+      <h2 class="contact-title">Get In Touch</h2>
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div class="contact-item-text">
+            <strong>Phone</strong>
+            <a href="tel:8103947806">(810) 394-7806</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="contact-item-text">
+            <strong>Address</strong>
+            <a href="https://maps.google.com/?q=6346+Academy+Dr+Brighton+MI+48116" target="_blank">6346 Academy Dr, Brighton, MI 48116</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 24 24" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <div class="contact-item-text">
+            <strong>Hours</strong>
+            Call to schedule an appointment
+          </div>
+        </div>
+      </div>
+      <a href="tel:8103947806" class="btn-primary" style="font-size:0.82rem;">Call Now to Schedule</a>
+    </div>
+    <div class="contact-map">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2940.3!2d-83.782!3d42.515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDLCsDMwJzU0LjAiTiA4M8KwNDYnNTUuMiJX!5e0!3m2!1sen!2sus!4v1600000000000!5m2!1sen!2sus&q=6346+Academy+Dr,+Brighton,+MI+48116"
+        allowfullscreen=""
+        loading="lazy"
+        title="SewFine LLC Location">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand"><span>Sew</span>Fine LLC</div>
+  <p class="footer-copy">© 2025 SewFine LLC · Brighton, MI · All rights reserved.</p>
+  <div class="footer-right">
+    <a href="tel:8103947806">(810) 394-7806</a>
+    <a href="https://maps.google.com/?q=6346+Academy+Dr+Brighton+MI+48116" target="_blank">Directions</a>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 120);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
