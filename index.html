@@ -13,8 +13,11 @@
     --cream: #f5f0e8;
     --dark: #0e0e0e;
     --charcoal: #1a1a1a;
+    --panel: #211f1c;
     --gold: #c9a84c;
     --gold-light: #e0c278;
+    --teal: #567f78;
+    --copper: #9c663d;
     --muted: #888;
     --border: rgba(201,168,76,0.25);
   }
@@ -22,7 +25,10 @@
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--dark);
+    background:
+      linear-gradient(135deg, rgba(201,168,76,0.05) 0 1px, transparent 1px 18px),
+      linear-gradient(90deg, rgba(86,127,120,0.06), transparent 38%, rgba(156,102,61,0.06)),
+      var(--dark);
     color: var(--cream);
     font-family: 'DM Sans', sans-serif;
     font-weight: 300;
@@ -39,9 +45,10 @@
     align-items: center;
     justify-content: space-between;
     padding: 22px 60px;
-    background: rgba(14,14,14,0.88);
-    backdrop-filter: blur(12px);
+    background: rgba(14,14,14,0.82);
+    backdrop-filter: blur(18px);
     border-bottom: 1px solid var(--border);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.22);
   }
 
   .nav-logo {
@@ -75,30 +82,35 @@
   .nav-links a:hover { opacity: 1; color: var(--gold); }
 
   .nav-cta {
-    background: var(--gold) !important;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light)) !important;
     color: var(--dark) !important;
     padding: 10px 18px !important;
-    border-radius: 2px;
+    border-radius: 999px;
     opacity: 1 !important;
     font-weight: 500 !important;
     letter-spacing: 0.04em !important;
     white-space: nowrap !important;
-    transition: background 0.2s !important;
+    box-shadow: 0 10px 28px rgba(201,168,76,0.18);
+    transition: transform 0.2s, box-shadow 0.2s !important;
   }
 
-  .nav-cta:hover { background: var(--gold-light) !important; }
+  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 12px 34px rgba(201,168,76,0.28); }
 
   /* ── HERO ── */
   .hero {
-    min-height: 100vh;
+    min-height: 86vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 140px 60px 80px;
+    align-items: flex-start;
+    text-align: left;
+    padding: 120px 60px 62px;
     position: relative;
     overflow: hidden;
+    background:
+      linear-gradient(90deg, rgba(14,14,14,0.98) 0%, rgba(14,14,14,0.91) 42%, rgba(14,14,14,0.58) 67%, rgba(14,14,14,0.38) 100%),
+      linear-gradient(0deg, rgba(14,14,14,0.92) 0%, transparent 32%, rgba(14,14,14,0.35) 100%),
+      url("assets/sewfine-workbench-hero.jpg") center right / cover no-repeat;
   }
 
   .hero::before {
@@ -106,8 +118,10 @@
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 60% 60% at 75% 50%, rgba(201,168,76,0.07) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 80% at 10% 80%, rgba(201,168,76,0.04) 0%, transparent 60%);
+      linear-gradient(135deg, rgba(245,240,232,0.04) 0 1px, transparent 1px 22px),
+      radial-gradient(ellipse 42% 52% at 16% 54%, rgba(201,168,76,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 26% 40% at 80% 36%, rgba(86,127,120,0.14) 0%, transparent 68%);
+    pointer-events: none;
   }
 
   /* subtle thread-line decorative element */
@@ -127,6 +141,11 @@
     );
   }
 
+  .hero > * {
+    position: relative;
+    z-index: 1;
+  }
+
   .hero-eyebrow {
     font-size: 0.75rem;
     letter-spacing: 0.28em;
@@ -142,11 +161,13 @@
     font-size: clamp(3.2rem, 7vw, 6.5rem);
     font-weight: 900;
     line-height: 1.0;
-    letter-spacing: -0.02em;
-    max-width: 720px;
+    letter-spacing: 0;
+    width: min(100%, 690px);
+    max-width: 690px;
     margin-bottom: 32px;
     opacity: 0;
     animation: fadeUp 0.9s 0.35s forwards;
+    text-shadow: 0 18px 60px rgba(0,0,0,0.42);
   }
 
   .hero-title em {
@@ -156,12 +177,13 @@
 
   .hero-sub {
     font-size: 1.05rem;
-    color: rgba(245,240,232,0.65);
-    max-width: 500px;
+    color: rgba(245,240,232,0.74);
+    width: min(100%, 560px);
+    max-width: 560px;
     margin-bottom: 20px;
     opacity: 0;
     animation: fadeUp 0.9s 0.5s forwards;
-    text-align: center;
+    text-align: left;
   }
 
   .hero-tagline {
@@ -169,23 +191,28 @@
     font-style: italic;
     font-size: 1rem;
     color: var(--gold);
+    width: min(100%, 560px);
     opacity: 0;
     animation: fadeUp 0.9s 0.65s forwards;
     margin-bottom: 48px;
   }
 
   .hero-actions {
+    position: relative;
+    top: -12px;
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     opacity: 0;
     animation: fadeUp 0.9s 0.8s forwards;
   }
 
   .btn-primary {
-    display: inline-block;
-    background: var(--gold);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
     color: var(--dark);
     text-decoration: none;
     font-size: 0.85rem;
@@ -193,14 +220,17 @@
     letter-spacing: 0.12em;
     text-transform: uppercase;
     padding: 16px 36px;
-    border-radius: 2px;
-    transition: background 0.2s, transform 0.2s;
+    border-radius: 999px;
+    box-shadow: 0 16px 34px rgba(201,168,76,0.16);
+    transition: transform 0.2s, box-shadow 0.2s;
   }
 
-  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 18px 42px rgba(201,168,76,0.27); }
 
   .btn-secondary {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     border: 1px solid var(--border);
     color: var(--cream);
     text-decoration: none;
@@ -209,20 +239,24 @@
     letter-spacing: 0.12em;
     text-transform: uppercase;
     padding: 16px 36px;
-    border-radius: 2px;
-    transition: border-color 0.2s, color 0.2s;
+    border-radius: 999px;
+    background: rgba(245,240,232,0.03);
+    backdrop-filter: blur(10px);
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
   }
 
-  .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+  .btn-secondary:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.08); }
 
   .hero-meta {
     position: absolute;
-    bottom: 50px;
-    right: 60px;
+    bottom: 24px;
+    left: 60px;
+    right: auto;
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 8px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
     opacity: 0;
     animation: fadeUp 0.9s 1s forwards;
   }
@@ -231,7 +265,12 @@
     font-size: 0.72rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: rgba(245,240,232,0.4);
+    color: rgba(245,240,232,0.62);
+    border: 1px solid rgba(245,240,232,0.11);
+    border-radius: 999px;
+    padding: 8px 12px;
+    background: rgba(14,14,14,0.38);
+    backdrop-filter: blur(10px);
   }
 
   .hero-meta-item span { color: var(--gold); }
@@ -242,13 +281,16 @@
     align-items: center;
     justify-content: center;
     gap: 32px;
-    padding: 28px 60px;
+    padding: 30px 60px;
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
-    background: rgba(201,168,76,0.03);
+    background:
+      linear-gradient(90deg, rgba(86,127,120,0.1), transparent 35%, rgba(201,168,76,0.08)),
+      rgba(21,20,18,0.92);
     opacity: 0;
     animation: fadeUp 0.9s 1.1s forwards;
     overflow: hidden;
+    box-shadow: inset 0 1px rgba(255,255,255,0.03);
   }
 
   .reviews-rating {
@@ -257,6 +299,10 @@
     gap: 12px;
     white-space: nowrap;
     flex-shrink: 0;
+    background: rgba(245,240,232,0.04);
+    border: 1px solid rgba(201,168,76,0.18);
+    border-radius: 999px;
+    padding: 10px 16px;
   }
 
   .stars {
@@ -320,7 +366,7 @@
 
   /* ── SERVICES ── */
   .services {
-    padding: 0 60px 80px;
+    padding: 0 60px 90px;
   }
 
   .section-label {
@@ -347,36 +393,57 @@
   .services-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
+    gap: 18px;
   }
 
   .service-card {
-    background: var(--charcoal);
+    background:
+      linear-gradient(180deg, rgba(245,240,232,0.05), transparent 38%),
+      var(--panel);
     padding: 52px 44px;
     position: relative;
     overflow: hidden;
-    transition: background 0.3s;
-    border-top: 1px solid var(--border);
+    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    border: 1px solid rgba(201,168,76,0.18);
+    border-radius: 8px;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-shadow: 0 26px 70px rgba(0,0,0,0.16);
   }
 
   .service-card::before {
     content: '';
     position: absolute;
-    bottom: 0; left: 0;
-    width: 100%;
-    height: 2px;
-    background: var(--gold);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s ease;
+    inset: 0;
+    background:
+      linear-gradient(135deg, rgba(201,168,76,0.1) 0 1px, transparent 1px 20px),
+      radial-gradient(circle at 50% 0%, rgba(86,127,120,0.13), transparent 48%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
   }
 
-  .service-card:hover::before { transform: scaleX(1); }
-  .service-card:hover { background: #202020; }
+  .service-card::after {
+    content: '';
+    position: absolute;
+    left: 22px;
+    right: 22px;
+    bottom: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    transform: scaleX(0);
+    transition: transform 0.35s ease;
+  }
+
+  .service-card:hover::before { opacity: 1; }
+  .service-card:hover::after { transform: scaleX(1); }
+  .service-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(201,168,76,0.34);
+    box-shadow: 0 34px 90px rgba(0,0,0,0.28);
+  }
 
   .service-number {
     font-family: 'Playfair Display', serif;
@@ -396,10 +463,10 @@
     height: 56px;
     margin-bottom: 28px;
     opacity: 0.7;
-    transition: opacity 0.3s;
+    transition: opacity 0.3s, transform 0.3s;
   }
 
-  .service-card:hover .service-icon { opacity: 1; }
+  .service-card:hover .service-icon { opacity: 1; transform: translateY(-2px); }
 
   .service-name {
     font-family: 'Playfair Display', serif;
@@ -429,27 +496,39 @@
   }
 
   .service-link:hover { gap: 16px; }
-  .service-link::after { content: '→'; }
+  .service-link::after { content: '>'; }
 
   /* ── ABOUT STRIP ── */
   .about-strip {
-    margin: 0 60px 80px;
-    padding: 64px;
-    border: 1px solid var(--border);
+    margin: 0 0 90px;
+    padding: 78px 60px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 80px;
     align-items: center;
     position: relative;
     overflow: hidden;
-    text-align: center;
+    text-align: left;
+    background:
+      linear-gradient(110deg, rgba(86,127,120,0.12), transparent 42%, rgba(156,102,61,0.13)),
+      rgba(17,17,16,0.82);
   }
 
   .about-strip::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 50% 100% at 100% 50%, rgba(201,168,76,0.04) 0%, transparent 60%);
+    background:
+      radial-gradient(ellipse 35% 70% at 95% 45%, rgba(201,168,76,0.11) 0%, transparent 60%),
+      linear-gradient(135deg, rgba(245,240,232,0.035) 0 1px, transparent 1px 24px);
+    pointer-events: none;
+  }
+
+  .about-strip > * {
+    position: relative;
+    z-index: 1;
   }
 
   .about-eyebrow {
@@ -472,15 +551,26 @@
 
   .about-body {
     font-size: 0.92rem;
-    color: rgba(245,240,232,0.65);
+    color: rgba(245,240,232,0.72);
     line-height: 1.8;
+    max-width: 620px;
   }
 
   .about-stats {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 40px;
+    gap: 16px;
     text-align: center;
+  }
+
+  .about-stats > div {
+    min-height: 150px;
+    border: 1px solid rgba(201,168,76,0.16);
+    border-radius: 8px;
+    display: grid;
+    place-content: center;
+    padding: 24px 18px;
+    background: rgba(245,240,232,0.035);
   }
 
   .stat-number {
@@ -507,25 +597,32 @@
 
   .contact-inner {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2px;
+    grid-template-columns: minmax(320px, 0.85fr) minmax(360px, 1.15fr);
+    gap: 18px;
+    align-items: stretch;
   }
 
   .contact-info {
-    background: var(--charcoal);
+    background:
+      linear-gradient(180deg, rgba(245,240,232,0.055), transparent 42%),
+      var(--panel);
     padding: 64px;
-    border-top: 1px solid var(--border);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 8px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
+    box-shadow: 0 26px 70px rgba(0,0,0,0.18);
   }
 
   .contact-map {
     background: #161616;
-    border-top: 1px solid var(--border);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 8px;
     overflow: hidden;
-    min-height: 320px;
+    min-height: 440px;
+    box-shadow: 0 26px 70px rgba(0,0,0,0.2);
   }
 
   .contact-map iframe {
@@ -533,8 +630,8 @@
     height: 100%;
     border: 0;
     display: block;
-    filter: grayscale(60%) invert(90%) hue-rotate(180deg);
-    opacity: 0.75;
+    filter: grayscale(34%) contrast(1.05) saturate(0.75);
+    opacity: 0.92;
   }
 
   .contact-label {
@@ -556,28 +653,31 @@
   .contact-items {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 20px;
     margin-bottom: 44px;
-    align-items: center;
+    align-items: stretch;
     width: 100%;
   }
 
   .contact-item {
     display: flex;
     gap: 16px;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(201,168,76,0.12);
   }
 
   .contact-item-icon {
-    width: 36px;
-    height: 36px;
+    width: 42px;
+    height: 42px;
     border: 1px solid var(--border);
-    border-radius: 2px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    background: rgba(201,168,76,0.07);
   }
 
   .contact-item-icon svg { width: 16px; height: 16px; stroke: var(--gold); fill: none; }
@@ -671,21 +771,66 @@
     .nav-links { gap: 16px; }
     .nav-links a { font-size: 0.75rem; }
     .nav-home { display: none; }
-    .hero { padding: 120px 28px 80px; }
+    .hero {
+      min-height: 82vh;
+      padding: 122px 28px 86px;
+      align-items: center;
+      text-align: center;
+      background:
+        linear-gradient(180deg, rgba(14,14,14,0.78) 0%, rgba(14,14,14,0.93) 54%, rgba(14,14,14,0.98) 100%),
+        linear-gradient(90deg, rgba(14,14,14,0.68), rgba(14,14,14,0.36)),
+        url("assets/sewfine-workbench-hero.jpg") 62% center / cover no-repeat;
+    }
     .hero::after { display: none; }
+    .hero-title { font-size: clamp(2.55rem, 10.5vw, 4.1rem); max-width: 620px; }
+    .hero-sub { text-align: center; max-width: 560px; }
+    .hero-tagline { text-align: center; }
+    .hero-actions { justify-content: center; top: 0; }
     .hero-meta { display: none; }
     .reviews-strip { padding: 20px 28px; gap: 16px; }
     .reviews-quotes { display: none; }
     .divider { padding: 0 28px; margin: 50px 0; }
     .services { padding: 0 28px 60px; }
-    .services-grid { grid-template-columns: 1fr; gap: 2px; }
-    .about-strip { margin: 0 28px 60px; padding: 40px 28px; grid-template-columns: 1fr; gap: 40px; }
+    .services-grid { grid-template-columns: 1fr; gap: 18px; }
+    .about-strip { margin: 0 0 60px; padding: 52px 28px; grid-template-columns: 1fr; gap: 40px; text-align: center; }
+    .about-body { margin: 0 auto; }
     .contact { padding: 0 28px 80px; }
     .contact-inner { grid-template-columns: 1fr; }
-    .contact-info { padding: 40px 28px; }
-    .contact-map { min-height: 240px; }
+    .contact-info { padding: 42px 28px; align-items: center; text-align: center; }
+    .contact-item { text-align: left; }
+    .contact-map { min-height: 320px; }
     footer { grid-template-columns: 1fr; text-align: center; gap: 20px; padding: 40px 28px 28px; }
     .footer-right { justify-content: center; }
+  }
+
+  @media (max-width: 540px) {
+    nav { padding: 14px 16px; }
+    .nav-logo { font-size: 1rem; }
+    .nav-cta { padding: 9px 14px !important; }
+    .hero { padding: 106px 18px 64px; }
+    .hero { min-height: 760px; justify-content: center; }
+    .hero-eyebrow { font-size: 0.68rem; letter-spacing: 0.18em; margin-bottom: 20px; }
+    .hero-title {
+      width: min(100%, 350px);
+      font-size: clamp(2.15rem, 10vw, 2.9rem);
+      line-height: 1.04;
+      margin-bottom: 24px;
+    }
+    .hero-sub { width: min(100%, 350px); font-size: 0.98rem; }
+    .hero-tagline { width: min(100%, 350px); margin-bottom: 34px; }
+    .hero-actions { width: min(100%, 420px); }
+    .btn-primary,
+    .btn-secondary { width: 100%; padding: 15px 20px; }
+    .reviews-rating { flex-wrap: wrap; justify-content: center; border-radius: 8px; }
+    .divider-text { text-align: center; }
+    .section-title { margin-bottom: 42px; }
+    .service-card { padding: 42px 26px; }
+    .about-stats { grid-template-columns: 1fr; }
+    .contact { padding: 0 18px 66px; }
+    .contact-info { padding: 36px 22px; }
+    .contact-item { gap: 12px; }
+    .contact-map { min-height: 300px; }
+    .footer-right { flex-direction: column; gap: 12px; }
   }
 </style>
 </head>
@@ -702,16 +847,16 @@
 
 <!-- HERO -->
 <section class="hero">
-  <p class="hero-eyebrow">SewFine LLC · Brighton, Michigan</p>
+  <p class="hero-eyebrow">SewFine LLC &middot; Brighton, Michigan</p>
   <h1 class="hero-title">Sewing Machine<br><em>Repair</em> &amp; Service</h1>
-  <p class="hero-sub">Expert sewing machine repair serving the Michigan community for over 40 years. From vintage Singers to modern computerized machines — we keep them running like new.</p>
+  <p class="hero-sub">Expert sewing machine repair serving the Michigan community for over 40 years. From vintage Singers to modern computerized machines &mdash; we keep them running like new.</p>
   <p class="hero-tagline">"Trusted craftsmanship, stitch after stitch."</p>
   <div class="hero-actions">
     <a href="tel:8103947806" class="btn-primary">Call (810) 394-7806</a>
     <a href="#services" class="btn-secondary">Our Services</a>
   </div>
   <div class="hero-meta">
-    <span class="hero-meta-item">⭐ <span>5.0</span> Google Rating</span>
+    <span class="hero-meta-item"><span>5.0</span> Google Rating</span>
     <span class="hero-meta-item">Serving Michigan <span>40+ Years</span></span>
     <span class="hero-meta-item">Brighton, MI <span>48116</span></span>
   </div>
@@ -720,7 +865,7 @@
 <!-- REVIEWS STRIP -->
 <div class="reviews-strip">
   <div class="reviews-rating">
-    <div class="stars">★★★★★</div>
+    <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
     <div class="rating-score">5.0</div>
     <div class="rating-label">Google Reviews</div>
   </div>
@@ -755,7 +900,7 @@
         <circle cx="28" cy="28" r="2.5" fill="#c9a84c"/>
       </svg>
       <h3 class="service-name">Machine Repair</h3>
-      <p class="service-desc">From jammed mechanisms to broken timing, we diagnose and fix all makes and models — mechanical and computerized. Your machine leaves running smoothly, every time.</p>
+      <p class="service-desc">From jammed mechanisms to broken timing, we diagnose and fix all makes and models &mdash; mechanical and computerized. Your machine leaves running smoothly, every time.</p>
       <a class="service-link" href="tel:8103947806">Book a Repair</a>
     </div>
 
@@ -768,7 +913,7 @@
         <line x1="18" y1="40" x2="38" y2="40" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
       </svg>
       <h3 class="service-name">Cleaning &amp; Tune-Up</h3>
-      <p class="service-desc">Lint, oil residue, and worn parts build up over time. A full cleaning and tune-up restores tension, timing, and stitch quality — keeping your machine in peak condition.</p>
+      <p class="service-desc">Lint, oil residue, and worn parts build up over time. A full cleaning and tune-up restores tension, timing, and stitch quality &mdash; keeping your machine in peak condition.</p>
       <a class="service-link" href="tel:8103947806">Schedule a Tune-Up</a>
     </div>
 
@@ -781,7 +926,7 @@
         <circle cx="28" cy="31" r="3" stroke="#c9a84c" stroke-width="1.5"/>
       </svg>
       <h3 class="service-name">All Makes &amp; Models</h3>
-      <p class="service-desc">Singer, Brother, Janome, Bernina, Viking — vintage or modern, we service them all. Over four decades of experience means very little we haven't seen and fixed before.</p>
+      <p class="service-desc">Singer, Brother, Janome, Bernina, Viking &mdash; vintage or modern, we service them all. Over four decades of experience means very little we haven't seen and fixed before.</p>
       <a class="service-link" href="tel:8103947806">Get in Touch</a>
     </div>
 
@@ -837,7 +982,7 @@
           </div>
           <div class="contact-item-text">
             <strong>Address</strong>
-            <a href="https://maps.google.com/?q=6346+Academy+Dr+Brighton+MI+48116" target="_blank">6346 Academy Dr, Brighton, MI 48116</a>
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=6346%20Academy%20Dr%2C%20Brighton%2C%20MI%2048116" target="_blank" rel="noopener">6346 Academy Dr, Brighton, MI 48116</a>
           </div>
         </div>
         <div class="contact-item">
@@ -854,9 +999,10 @@
     </div>
     <div class="contact-map">
       <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2940.3!2d-83.782!3d42.515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDLCsDMwJzU0LjAiTiA4M8KwNDYnNTUuMiJX!5e0!3m2!1sen!2sus!4v1600000000000!5m2!1sen!2sus&q=6346+Academy+Dr,+Brighton,+MI+48116"
+        src="https://maps.google.com/maps?q=6346%20Academy%20Dr%2C%20Brighton%2C%20MI%2048116&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
         allowfullscreen=""
         loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
         title="SewFine LLC Location">
       </iframe>
     </div>
@@ -866,10 +1012,10 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-brand"><span>Sew</span>Fine LLC</div>
-  <p class="footer-copy">© 2025 SewFine LLC · Brighton, MI · All rights reserved.</p>
+  <p class="footer-copy">SewFine LLC &middot; Brighton, MI &middot; All rights reserved.</p>
   <div class="footer-right">
     <a href="tel:8103947806">(810) 394-7806</a>
-    <a href="https://maps.google.com/?q=6346+Academy+Dr+Brighton+MI+48116" target="_blank">Directions</a>
+    <a href="https://www.google.com/maps/search/?api=1&amp;query=6346%20Academy%20Dr%2C%20Brighton%2C%20MI%2048116" target="_blank" rel="noopener">Directions</a>
   </div>
 </footer>
 
