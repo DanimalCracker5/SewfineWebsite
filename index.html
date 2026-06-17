@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home | SewFine LLC</title>
+<title>Home | SewFine</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -400,7 +400,7 @@
     background:
       linear-gradient(180deg, rgba(245,240,232,0.05), transparent 38%),
       var(--panel);
-    padding: 52px 44px;
+    padding: 0;
     position: relative;
     overflow: hidden;
     transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
@@ -411,6 +411,31 @@
     flex-direction: column;
     align-items: center;
     box-shadow: 0 26px 70px rgba(0,0,0,0.16);
+  }
+
+  .service-image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+    border-bottom: 1px solid rgba(201,168,76,0.18);
+    filter: saturate(0.82) contrast(1.04);
+    transition: transform 0.5s ease, filter 0.35s ease;
+  }
+
+  .service-card:hover .service-image {
+    transform: scale(1.025);
+    filter: saturate(0.95) contrast(1.04);
+  }
+
+  .service-content {
+    position: relative;
+    z-index: 1;
+    padding: 32px 34px 38px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
   }
 
   .service-card::before {
@@ -488,6 +513,7 @@
     align-items: center;
     gap: 10px;
     color: var(--gold);
+    margin-top: auto;
     text-decoration: none;
     font-size: 0.78rem;
     letter-spacing: 0.15em;
@@ -824,7 +850,7 @@
     .reviews-rating { flex-wrap: wrap; justify-content: center; border-radius: 8px; }
     .divider-text { text-align: center; }
     .section-title { margin-bottom: 42px; }
-    .service-card { padding: 42px 26px; }
+    .service-content { padding: 30px 26px 36px; }
     .about-stats { grid-template-columns: 1fr; }
     .contact { padding: 0 18px 66px; }
     .contact-info { padding: 36px 22px; }
@@ -838,7 +864,7 @@
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#"><span>Sew</span>Fine LLC</a>
+  <a class="nav-logo" href="#"><span>Sew</span>Fine</a>
   <ul class="nav-links">
     <li class="nav-home"><a href="#">Home</a></li>
     <li><a href="tel:8103947806" class="nav-cta">Call Now</a></li>
@@ -847,7 +873,7 @@
 
 <!-- HERO -->
 <section class="hero">
-  <p class="hero-eyebrow">SewFine LLC &middot; Brighton, Michigan</p>
+  <p class="hero-eyebrow">SewFine &middot; Brighton, Michigan</p>
   <h1 class="hero-title">Sewing Machine<br><em>Repair</em> &amp; Service</h1>
   <p class="hero-sub">Expert sewing machine repair serving the Michigan community for over 40 years. From vintage Singers to modern computerized machines &mdash; we keep them running like new.</p>
   <p class="hero-tagline">"Trusted craftsmanship, stitch after stitch."</p>
@@ -893,41 +919,50 @@
 
     <!-- Repair -->
     <div class="service-card reveal">
-      <div class="service-number">01</div>
-      <svg class="service-icon" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="28" cy="28" r="20" stroke="#c9a84c" stroke-width="1.5"/>
-        <path d="M28 16 L28 28 L36 34" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
-        <circle cx="28" cy="28" r="2.5" fill="#c9a84c"/>
-      </svg>
-      <h3 class="service-name">Machine Repair</h3>
-      <p class="service-desc">From jammed mechanisms to broken timing, we diagnose and fix all makes and models &mdash; mechanical and computerized. Your machine leaves running smoothly, every time.</p>
-      <a class="service-link" href="tel:8103947806">Call Now</a>
+      <img class="service-image" src="assets/service-machine-repair.jpg" alt="Sewing machine being carefully repaired on a workshop bench" loading="lazy">
+      <div class="service-content">
+        <div class="service-number">01</div>
+        <svg class="service-icon" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="28" cy="28" r="20" stroke="#c9a84c" stroke-width="1.5"/>
+          <path d="M28 16 L28 28 L36 34" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="28" cy="28" r="2.5" fill="#c9a84c"/>
+        </svg>
+        <h3 class="service-name">Machine Repair</h3>
+        <p class="service-desc">From jammed mechanisms to broken timing, we diagnose and fix all makes and models &mdash; mechanical and computerized. Your machine leaves running smoothly, every time.</p>
+        <a class="service-link" href="tel:8103947806">Call Now</a>
+      </div>
     </div>
 
     <!-- Tune-Up -->
     <div class="service-card reveal">
-      <div class="service-number">02</div>
-      <svg class="service-icon" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M20 36 Q28 18 36 36" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
-        <circle cx="28" cy="20" r="3" stroke="#c9a84c" stroke-width="1.5"/>
-        <line x1="18" y1="40" x2="38" y2="40" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
-      <h3 class="service-name">Cleaning &amp; Tune-Up</h3>
-      <p class="service-desc">Lint, oil residue, and worn parts build up over time. A full cleaning and tune-up restores tension, timing, and stitch quality &mdash; keeping your machine in peak condition.</p>
-      <a class="service-link" href="tel:8103947806">Call Now</a>
+      <img class="service-image" src="assets/service-cleaning-tune-up.jpg" alt="Sewing machine needle and bobbin area prepared for cleaning and tune-up" loading="lazy">
+      <div class="service-content">
+        <div class="service-number">02</div>
+        <svg class="service-icon" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 36 Q28 18 36 36" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="28" cy="20" r="3" stroke="#c9a84c" stroke-width="1.5"/>
+          <line x1="18" y1="40" x2="38" y2="40" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <h3 class="service-name">Cleaning &amp; Tune-Up</h3>
+        <p class="service-desc">Lint, oil residue, and worn parts build up over time. A full cleaning and tune-up restores tension, timing, and stitch quality &mdash; keeping your machine in peak condition.</p>
+        <a class="service-link" href="tel:8103947806">Call Now</a>
+      </div>
     </div>
 
     <!-- Vintage / All Brands -->
     <div class="service-card reveal">
-      <div class="service-number">03</div>
-      <svg class="service-icon" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="14" y="22" width="28" height="18" rx="2" stroke="#c9a84c" stroke-width="1.5"/>
-        <path d="M20 22 L20 18 Q20 14 28 14 Q36 14 36 18 L36 22" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
-        <circle cx="28" cy="31" r="3" stroke="#c9a84c" stroke-width="1.5"/>
-      </svg>
-      <h3 class="service-name">All Makes &amp; Models</h3>
-      <p class="service-desc">Singer, Brother, Janome, Bernina, Viking &mdash; vintage or modern, we service them all. Over four decades of experience means very little we haven't seen and fixed before.</p>
-      <a class="service-link" href="tel:8103947806">Call Now</a>
+      <img class="service-image" src="assets/service-all-models.jpg" alt="Vintage, mechanical, and modern sewing machines lined up in a workshop" loading="lazy">
+      <div class="service-content">
+        <div class="service-number">03</div>
+        <svg class="service-icon" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="14" y="22" width="28" height="18" rx="2" stroke="#c9a84c" stroke-width="1.5"/>
+          <path d="M20 22 L20 18 Q20 14 28 14 Q36 14 36 18 L36 22" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="28" cy="31" r="3" stroke="#c9a84c" stroke-width="1.5"/>
+        </svg>
+        <h3 class="service-name">All Makes &amp; Models</h3>
+        <p class="service-desc">Singer, Brother, Janome, Bernina, Viking &mdash; vintage or modern, we service them all. Over four decades of experience means very little we haven't seen and fixed before.</p>
+        <a class="service-link" href="tel:8103947806">Call Now</a>
+      </div>
     </div>
 
   </div>
@@ -938,7 +973,7 @@
   <div>
     <p class="about-eyebrow">About SewFine</p>
     <h2 class="about-title">Over <em>40 Years</em> of<br>Expert Service</h2>
-    <p class="about-body">SewFine LLC is a home-based sewing machine repair service in Brighton, Michigan, run by Dan. With over four decades of hands-on experience, Dan has built a reputation for honest, skilled work and a genuine love for the craft. From beloved vintage machines to the latest computerized models, every repair gets the same careful attention.</p>
+    <p class="about-body">SewFine is a home-based sewing machine repair service in Brighton, Michigan, run by Dan. With over four decades of hands-on experience, Dan has built a reputation for honest, skilled work and a genuine love for the craft. From beloved vintage machines to the latest computerized models, every repair gets the same careful attention.</p>
   </div>
   <div class="about-stats">
     <div>
@@ -1003,7 +1038,7 @@
         allowfullscreen=""
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
-        title="SewFine LLC Location">
+        title="SewFine Location">
       </iframe>
     </div>
   </div>
@@ -1011,8 +1046,8 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-brand"><span>Sew</span>Fine LLC</div>
-  <p class="footer-copy">SewFine LLC &middot; Brighton, MI &middot; All rights reserved.</p>
+  <div class="footer-brand"><span>Sew</span>Fine</div>
+  <p class="footer-copy">SewFine &middot; Brighton, MI &middot; All rights reserved.</p>
   <div class="footer-right">
     <a href="tel:8103947806">(810) 394-7806</a>
     <a href="https://www.google.com/maps/search/?api=1&amp;query=6346%20Academy%20Dr%2C%20Brighton%2C%20MI%2048116" target="_blank" rel="noopener">Directions</a>
